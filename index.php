@@ -1,122 +1,126 @@
+<?php
+error_reporting(0);
+session_start();
+include("Control/configBd.php");
+include("Modelo/IngresoUsuario.php");
+include("Control/ControlIngresoUsuario.php");
+include("Control/ControlConexion.php");
+// $niv=ObtenerNiv($_SESSION['Usu']);
+
+// function ObtenerNiv($id)
+// {
+//     if ($id!=null)
+//     {
+//         $objConexion = new ControlConexion();
+//         $objConexion->abrirBd($GLOBALS['serv'],$GLOBALS['usua'],$GLOBALS['pass'],$GLOBALS['bdat']);
+//         $comandoSql ='SELECT * FROM tbl_ingresousuario  where NombreUsusario="'.$id.'" ';
+//         $recordSet=$objConexion->ejecutarSelect($comandoSql);
+//         $dp = $recordSet->fetch_array(MYSQLI_NUM);
+//         return ($dp[2]);
+//     }
+// }
+
+try{
+    $usu=$_POST["txtUsuario"];
+    $con=$_POST["txtContrasena"];
+    $bot=$_POST["btnEnviar"];
+ 
+    if($bot=="Enviar"){
+    $objIngresoUsuario=new IngresoUsuario($usu,$con,$niv);
+    $objControlIngresoUsuario =new ControlIngresoUsuario($objIngresoUsuario);
+        if($objControlIngresoUsuario->validarIngreso()){
+			$_SESSION['Usu']=  $usu;
+            $_SESSION['Con']=  $con;
+            $_SESSION['Niv']=  $niv;
+            header('Location: Vista/Menu.php');
+        }
+        else{
+            echo "<script>alert('Usuario y/o contraseña incorrectos');</script>";
+        }
+    }
+}
+catch (Exception $objExp) {
+    echo 'Se presentó una excepción: ',  $objExp->getMessage(), "\n";
+}
+
+
+echo'
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel=stylesheet href="Vista/css/stilos.css">
-    <title>Home</title>
-</head>
-<body>
+<html>
+    <head>
+        <title>Sisevid</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="stylelogin.css">
 
-<div class="navbar">
-   <a href="#" id="btnHome" >Home</a><!--onclick="Home()" -->
-   <a href="nosotros.php" id="btnQuienes" >Quienes Somos</a><!--onclick="Quienes()" -->
-  <a href="#" id="btnServicios" >Servicios</a><!--onclick="Servicios()" -->
-  <a href="#" id="btnProductos" >Productos</a><!--onclick="Productos()" -->
-  <a href="Vista/VistaLogin.php">Iniciar Sesión</a>
-</div>
-<section>
-        <div class="banner">
-            <div class="banner_video">
-                <video src="Vista/video/video1.mp4" autoplay muted loop></video>
-            </div>
-            <div class="banner_descripcion">
-                <div>
-                    <h2>EXPERTOS EN PROGRAMACIÓN, A SU SERVICIO</h2>
-                </div>
-            </div>
+    </head>
 
+    <body>
+        <div class="Title">
+            <h2>Sisevid</h2>
         </div>
-    </section>
-    <main>
-        <section>
-            <div id="boletin">
-                <div class="contenedor">
-                    <h2>Suscribete a Nuestro Boletin</h2>
-                    <form>
-                        <input type="email" name="email" placeholder="Ingrese el Email">
-                        <input type="submit" class="boton1" value="Suscribete">
-                    </form>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="caja">
-                <div class="contenedor_grid">
-                    <article>
-                        <div class="grid">
-                            <h3>HTML5</h3>
-                            <div class="caja__columna">
-                                <div class="caja1">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit tempore
-                                        tempora,
-                                        ratione sit, amet consectetur
-                                    </p>
-                                </div>
-                                <div class="caja1">
-                                    <img src="Vista/img/logo1.png">
-                                </div>
-                                <div class="caja1">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit tempore
-                                        tempora,
-                                        ratione sit, amet consectetur !</p>
-                                </div>
-
-
-                                <div class="caja1">
-                                    <h3>CSS3</h3>
-                                </div>
-
-
-                                <div class="caja1">
-                                    <img src="Vista/img/logo2_1.png">
-                                </div>
-
-                                <div class="caja1">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit tempore
-                                        tempora,
-                                        ratione
-                                        repellendus commodi soluta! Ipsa laborum accusamus amet natus vero, quo sit,
-                                        ullam
-                                        nesciunt
-                                        facilis quod in cupiditate inventore!</p>
-                                </div>
-                                <div class="caja1">
-                                    <h3>Diseño Grafico</h3>
-                                </div>
-                                <div class="caja1">
-                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Impedit tempore
-                                        tempora, ratione
-                                        repellendus commodi soluta! Ipsa laborum accusamus amet natus vero, quo sit,
-                                        ullam nesciunt
-                                        facilis quod in cupiditate inventore!</p>
-                                </div>
-                                <div class="caja1">
-                                    <img src="Vista/img/logo3.png">
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <div class="container-footer">
-            <footer>
-                <div class="redes-footer">
-                    <a href="#"><i class="fab fa-facebook-f icon-redes-footer"></i></a>
-                    <a href="#"><i class="fab fa-google-plus-g icon-redes-footer"></i></a>
-                    <a href="#"><i class="fab fa-instagram icon-redes-footer"></i></a>
-                </div>
-                <hr>
-                <h4> Desarrollador | Miguel Hernández - Todos los Derechos Reservados 2021&copy;</h4>
-            </footer>
+        <div class="container right-panel-active">
+        <!-- Sign Up -->
+        <div class="container__form container--signup">
+            <form action="#" class="form" id="form1">
+                <h2 class="form__title">Registrarse</h2>
+                <input type="text" placeholder="User" class="input" />
+                <input type="email" placeholder="Email" class="input" />
+                <input type="password" placeholder="Password" class="input" />
+                <button class="btn">Registrarse</button>
+            </form>
         </div>
-    </main>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script type="text/javascript" src="Vista/js/main.js"></script>
-<script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script> 
-</body>
+
+        <!-- Sign In -->
+        <div class="container__form container--signin">
+            <form action="index.php" method="POST" class="form" id="form2">
+                <h2 class="form__title">Iniciar Sesión</h2>
+                <input type="text" name="txtUsuario"  placeholder="Usuario" class="input" />
+                <input type="password" name="txtContrasena" placeholder="Contraseña" class="input" />
+                <a href="#" class="link">¿Olvidaste tu contraseña?</a>
+
+                <button class="btn" name="btnEnviar" value="Enviar" >Iniciar Sesión</button>
+            </form>
+        </div>
+
+        <!-- Overlay -->
+        <div class="container__overlay">
+            <div class="overlay">
+                <div class="overlay__panel overlay--left">
+                    <button class="btn" id="signIn">Iniciar Sesión</button>
+                </div>
+                <div class="overlay__panel overlay--right">
+                    <button class="btn" id="signUp">Registrarse</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+
+<script>
+const signInBtn = document.getElementById("signIn");
+const signUpBtn = document.getElementById("signUp");
+/*const fistForm = document.getElementById("form1");
+const secondForm = document.getElementById("form2");*/
+const container = document.querySelector(".container");
+
+signInBtn.addEventListener("click", () => {
+	container.classList.remove("right-panel-active");
+});
+
+signUpBtn.addEventListener("click", () => {
+	container.classList.add("right-panel-active");
+});
+
+fistForm.addEventListener("submit", (e) => e.preventDefault());
+secondForm.addEventListener("submit", (e) => e.preventDefault());
+
+</script>
+
+
+
+    </body>
 </html>
+';
+?>

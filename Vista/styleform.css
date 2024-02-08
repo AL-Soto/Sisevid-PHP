@@ -1,0 +1,100 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    /* background-image: url("https://cdn.pixabay.com/photo/2022/03/01/02/51/galaxy-7040416_1280.png"); */
+    /*background-image: url("https://cdn.pixabay.com/photo/2016/11/29/12/41/desk-1869579_1280.jpg");*/
+    background: rgb(51,8,103);
+    background: linear-gradient(155deg, rgba(51,8,103,1) 0%, rgba(55,27,205,1) 23%, rgba(9,9,121,1) 50%, rgba(16,14,149,1) 52%, rgba(49,21,213,1) 97%);
+    
+    /* background: #252440; 
+    background-repeat: no-repeat; */
+    /* background-repeat: repeat; */
+}
+input{
+    width: 100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 0.5px solid rgb(0, 0, 0);
+    border-radius: 4px;
+}
+select{
+
+    width:100%;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border: 0.5px solid rgb(0, 0, 0);
+    border-radius: 4px;
+}
+h1{
+    color:black;
+}
+label{
+    font-size: 20px;
+    color: black;
+}
+.IngresoDT{
+    border-radius: 10px;
+    background-color: #ECE9E6;
+    padding: 18px;
+    width: 450px;
+    height: auto;
+    margin: auto;
+    color: rgb(255, 255, 255);
+    box-shadow: 5px 5px 5px 5px rgb(19, 20, 22);
+}
+/* #Evid{
+    display: none;
+} */
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .IngresoDT {
+      width: 100%;
+      margin-top: 0;
+    }
+    .Btn input{
+        width: 20%;
+    }
+  }
+
+.Btn{
+    
+    padding: 2px 34px;
+    margin: 4px 2px;
+}
+.Btn input{
+    cursor: pointer;
+    width: 80px;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    background: rgb(51,8,103);
+    background: linear-gradient(155deg, rgba(51,8,103,1) 0%, rgba(55,27,205,1) 23%, rgba(9,9,121,1) 50%, rgba(16,14,149,1) 52%, rgba(49,21,213,1) 97%);
+    
+
+}
+.IngresoDT .btMenu {
+    position: relative;
+    float: right;
+    width: 60px;
+    color: rgb(0, 0, 0);
+}
+.IngresoDT .btMenu button {
+    background-color: rgb(8, 8, 8);
+    border-radius: 5px 15px;
+
+}
+.IngresoDT .btMenu span {
+    color: black;
+    
+}
+
+
+.CajaMensajes p{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+.CajaMensajes {
+    width: 250px;
+}
